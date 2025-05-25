@@ -13,8 +13,8 @@ class TOTPAutoFiller {
 
     async loadSecret() {
         try {
-            const result = await chrome.storage.local.get(["totpSecret"]);
-            this.secret = result.totpSecret || null;
+            const result = await chrome.storage.local.get(["trentotpSecret"]);
+            this.secret = result.trentotpSecret || null;
         } catch (error) {
             console.error("Error loading secret:", error);
         }
@@ -29,8 +29,7 @@ class TOTPAutoFiller {
             // Trigger input event to ensure the form recognizes the change
             tokenElement.dispatchEvent(new Event("input", { bubbles: true }));
             tokenElement.dispatchEvent(new Event("change", { bubbles: true }));
-            
-            console.log("TOTP code auto-filled:", totpCode);
+
         } else if (!tokenElement) {
             // If element not found immediately, try again after a short delay
             setTimeout(() => this.fillTOTPCode(), 500);
