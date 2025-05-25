@@ -2,6 +2,10 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
+    user-select: none;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
 }
 
 body {
@@ -64,14 +68,22 @@ h1 {
 }
 
 .upload-icon {
-    font-size: 4em;
-    color: #ddd;
     margin-bottom: 20px;
+    transition: all 0.3s ease;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.upload-icon svg {
+    width: 80px;
+    height: 80px;
+    fill: #ddd;
     transition: all 0.3s ease;
 }
 
-.upload-area:hover .upload-icon {
-    color: #c41e3a;
+.upload-area:hover .upload-icon svg {
+    fill: #c41e3a;
     transform: scale(1.1);
 }
 
@@ -128,7 +140,10 @@ h1 {
     box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: all 0.2s ease;
-    user-select: all;
+    user-select: all !important;
+    -webkit-user-select: all !important;
+    -moz-user-select: all !important;
+    -ms-user-select: all !important;
 }
 
 .secret-value:hover {

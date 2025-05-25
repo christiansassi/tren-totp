@@ -5,8 +5,7 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>TOTP QR Code Secret Extractor</title>
         <link rel="stylesheet" href="css/style.css">
-        <script src="libs/jsQR.js"></script>
-        <script src="https://cdnjs.cloudflare.com/ajax/libs/protobufjs/7.2.5/protobuf.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jsQR/1.4.0/jsQR.min.js"></script>
     </head>
     <body>
         <div class="container">
@@ -14,7 +13,15 @@
             <p class="subtitle">Extract TOTP secrets from Google Authenticator QR codes</p>
             
             <div class="upload-area" id="uploadArea">
-                <div class="upload-icon">📱</div>
+                <div class="upload-icon">
+                    <svg version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" viewBox="0,0,256,256">
+                        <g fill="currentColor" fill-rule="nonzero" stroke="none" stroke-width="1" stroke-linecap="butt" stroke-linejoin="miter" stroke-miterlimit="10" stroke-dasharray="" stroke-dashoffset="0" font-family="none" font-weight="none" font-size="none" text-anchor="none" style="mix-blend-mode: normal">
+                            <g transform="scale(5.12,5.12)">
+                                <path d="M4,4v1v13h14v-14zM32,4v1v13h14v-14zM6,6h10v10h-10zM20,6v6h4v3h-4v5h-9v4h-4v6h6v-4h3v4h6v-8h2v4h7v3h5v3h-8v4h-4v6h6v-4h6v8h10v-10h-8v-2h8v-10h-6v3h-2v-7h-12v-3h4v-7h-4v-4zM34,6h10v10h-10zM8,8v6h6v-6zM36,8v6h6v-6zM4,32v1v13h14v-14zM6,34h10v10h-10zM8,36v6h6v-6z"></path>
+                            </g>
+                        </g>
+                    </svg>
+                </div>
                 <div class="upload-text">
                     Drop your QR code image here or click to browse
                 </div>
