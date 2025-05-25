@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="UTF-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <title>TOTP QR Code Secret Extractor</title>
+        <link rel="stylesheet" href="css/style.css">
+        <script src="libs/jsQR.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/protobufjs/7.2.5/protobuf.min.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <h1>🔐 TOTP Extractor</h1>
+            <p class="subtitle">Extract TOTP secrets from Google Authenticator QR codes</p>
+            
+            <div class="upload-area" id="uploadArea">
+                <div class="upload-icon">📱</div>
+                <div class="upload-text">
+                    Drop your QR code image here or click to browse
+                </div>
+            </div>
+            
+            <input type="file" id="fileInput" accept="image/*">
+            
+            <img id="previewImage" class="preview-image" alt="QR Code Preview">
+            
+            <div class="loading" id="loading">
+                <div class="spinner"></div>
+                <p>Processing QR code...</p>
+            </div>
+            
+            <div class="result-area" id="resultArea">
+                <div class="secret-display">
+                    <div class="secret-value" id="secretValue" title="Click to copy"></div>
+                    <button class="copy-btn" onclick="copySecret()">📋 Copy Secret</button>
+                </div>
+            </div>
+            
+            <div id="errorMessage"></div>
+        </div>
+
+        <script src="js/script.js"></script>
+    </body>
+</html>
