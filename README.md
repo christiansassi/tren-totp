@@ -1,8 +1,16 @@
 # TREN-TOTP
-<div>
-    <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white" alt="HTML"/>
-    <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E" alt="JavaScript"/>
-    <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=flat&logo=css3&logoColor=white" alt="CSS"/>
+<div align="center">
+    <p>
+        <picture>
+            <source media="(prefers-color-scheme: dark)" srcset="assets/tren-totp.png">
+            <img alt="https://www.unitn.it/" src="assets/tren-totp.png" width="75%">
+        </picture>
+    </p>
+    <div>
+        <img src="https://img.shields.io/badge/html5-%23E34F26.svg?style=flat&logo=html5&logoColor=white" alt="HTML"/>
+        <img src="https://img.shields.io/badge/javascript-%23323330.svg?style=flat&logo=javascript&logoColor=%23F7DF1E" alt="JavaScript"/>
+        <img src="https://img.shields.io/badge/css3-%231572B6.svg?style=flat&logo=css3&logoColor=white" alt="CSS"/>
+    </div>
 </div>
 
 ## Table of Contents
