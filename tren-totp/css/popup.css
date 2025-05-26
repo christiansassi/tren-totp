@@ -139,12 +139,8 @@ body {
 
 .no-totp-message {
     font-size: 16px;
-    color: #86868b;
     text-align: center;
     padding: 32px;
-    background: rgba(134, 134, 139, 0.05);
-    border: 1px dashed rgba(134, 134, 139, 0.2);
-    border-radius: 12px;
 }
 
 .settings-content {
