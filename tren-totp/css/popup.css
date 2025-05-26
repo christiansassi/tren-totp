@@ -129,6 +129,7 @@ body {
     background: white;
     outline: none;
     text-align: center;
+    transition: all 0.2s ease;
 }
 
 .secret-input:focus {
@@ -137,6 +138,24 @@ body {
 
 .secret-input::placeholder {
     color: #AEAEB2;
+}
+
+/* Shake animation for invalid input */
+.secret-input.shake {
+    animation: shake 0.5s ease-in-out;
+    border-color: #CE0E2D !important;
+}
+
+@keyframes shake {
+    0%, 100% {
+        transform: translateX(0);
+    }
+    10%, 30%, 50%, 70%, 90% {
+        transform: translateX(-4px);
+    }
+    20%, 40%, 60%, 80% {
+        transform: translateX(4px);
+    }
 }
 
 .save-btn {

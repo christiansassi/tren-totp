@@ -78,8 +78,9 @@ class TOTPGenerator {
 
     validateSecret(secret) {
         const saveBtn = document.getElementById("saveBtn");
-        const isValid = this.isValidBase32(secret.trim());
-        saveBtn.disabled = !secret.trim() || !isValid;
+        const cleanSecret = secret.trim().replace(/\s/g, "").toUpperCase();
+        const isValid = this.isValidBase32(cleanSecret);
+        saveBtn.disabled = !cleanSecret || !isValid;
     }
 
     isValidBase32(str) {
@@ -90,18 +91,82 @@ class TOTPGenerator {
         const base32Regex = /^[A-Z2-7]+$/;
         
         // Check if string matches base32 pattern and has reasonable length
-        return base32Regex.test(str) && str.length >= 8 && str.length % 8 === 0;
+        // Most TOTP secrets are between 16-32 characters, but we'll be more flexible
+        return base32Regex.test(str) && str.length >= 8;
     }
 
     async handleSave() {
         const secretInput = document.getElementById("secretInput");
         const secret = secretInput.value.trim().replace(/\s/g, "").toUpperCase();
         
-        if (this.isValidBase32(secret)) {
-            await this.saveSecret(secret);
-            this.showMain();
-            this.updateDisplay();
-            this.startTOTPUpdate();
+        // First check if it's valid base32
+        if (!this.isValidBase32(secret)) {
+            this.showInvalidSecretAnimation();
+            return; // Don't proceed further
+        }
+
+        try {
+            // Test if the secret can generate a valid TOTP
+            const testTOTP = this.testTOTPGeneration(secret);
+            if (testTOTP && testTOTP !== "ERROR") {
+                // Only save and navigate if TOTP generation is successful
+                await this.saveSecret(secret);
+                this.showMain(); // Go back to main screen only on success
+                this.updateDisplay();
+                this.startTOTPUpdate();
+            } else {
+                // Invalid secret - show shake animation and stay on settings
+                this.showInvalidSecretAnimation();
+            }
+        } catch (error) {
+            console.error("Error testing TOTP generation:", error);
+            this.showInvalidSecretAnimation();
+        }
+    }
+
+    showInvalidSecretAnimation() {
+        const secretInput = document.getElementById("secretInput");
+        
+        // Add shake class
+        secretInput.classList.add("shake");
+        
+        // Remove shake class after animation completes
+        setTimeout(() => {
+            secretInput.classList.remove("shake");
+        }, 500);
+    }
+
+    testTOTPGeneration(secret) {
+        try {
+            const time = Math.floor(Date.now() / 1000);
+            const timeStep = Math.floor(time / 30);
+            
+            // Convert base32 secret to bytes
+            const secretBytes = this.base32ToBytes(secret);
+            
+            // Convert time step to 8-byte array
+            const timeBuffer = new ArrayBuffer(8);
+            const timeView = new DataView(timeBuffer);
+            timeView.setUint32(4, timeStep, false); // Big-endian
+            
+            // HMAC-SHA1
+            const hmac = new jsSHA("SHA-1", "ARRAYBUFFER");
+            hmac.setHMACKey(secretBytes, "ARRAYBUFFER");
+            hmac.update(timeBuffer);
+            const hash = hmac.getHMAC("ARRAYBUFFER");
+            
+            // Dynamic truncation
+            const hashArray = new Uint8Array(hash);
+            const offset = hashArray[19] & 0xf;
+            const code = ((hashArray[offset] & 0x7f) << 24) |
+                        ((hashArray[offset + 1] & 0xff) << 16) |
+                        ((hashArray[offset + 2] & 0xff) << 8) |
+                        (hashArray[offset + 3] & 0xff);
+            
+            const otp = (code % 1000000).toString().padStart(6, "0");
+            return otp;
+        } catch (error) {
+            return "ERROR";
         }
     }
 
