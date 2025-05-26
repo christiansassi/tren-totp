@@ -4,7 +4,8 @@
     "version": "1.0",
     "description": "Automatically generate and insert TOTP codes for the University of Trento portal.",
     "permissions": [
-        "storage"
+        "storage",
+        "activeTab"
     ],
     "action": {
         "default_popup": "popup.html",

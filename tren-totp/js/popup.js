@@ -17,8 +17,8 @@ class TOTPGenerator {
 
     async loadSecret() {
         try {
-            const result = await chrome.storage.local.get(["totpSecret"]);
-            this.secret = result.totpSecret || null;
+            const result = await chrome.storage.local.get(["trentotpSecret"]);
+            this.secret = result.trentotpSecret || null;
         } catch (error) {
             console.error("Error loading secret:", error);
         }
@@ -26,7 +26,7 @@ class TOTPGenerator {
 
     async saveSecret(secret) {
         try {
-            await chrome.storage.local.set({ totpSecret: secret });
+            await chrome.storage.local.set({ trentotpSecret: secret });
             this.secret = secret;
         } catch (error) {
             console.error("Error saving secret:", error);
