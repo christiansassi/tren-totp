@@ -22,13 +22,17 @@ class TOTPAutoFiller {
 
     fillTOTPCode() {
         const tokenElement = document.getElementById("tokencode");
-        if (tokenElement && this.secret) {
+        const btnAccedi = document.getElementById("btnAccedi");
+
+        if (tokenElement && btnAccedi && this.secret) {
             const totpCode = this.generateTOTP();
             tokenElement.value = totpCode;
             
             // Trigger input event to ensure the form recognizes the change
             tokenElement.dispatchEvent(new Event("input", { bubbles: true }));
             tokenElement.dispatchEvent(new Event("change", { bubbles: true }));
+            
+            btnAccedi.click();
 
         } else if (!tokenElement) {
             // If element not found immediately, try again after a short delay
